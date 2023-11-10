@@ -17,9 +17,15 @@ export default function songReducer(state = initialState, action) {
         selected: action.payload,
       };
     case ADD_SONG_TO_FAVOURITES:
-      return state;
+      return {
+        ...state,
+        favourites: [...state.favourites, action.payload],
+      };
     case REMOVE_SONG_FROM_FAVOURITES:
-      return state;
+      return {
+        ...state,
+        favourites: state.favourites.filter((fav) => fav.id !== action.payload),
+      };
     default:
       return state;
   }

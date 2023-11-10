@@ -181,10 +181,43 @@ ul {
   margin: 1em auto;
 }
 
-.song {
+.song img {
   cursor: pointer;
 }
 
 .end-buttom {
   width: 33%;
+}
+
+.icon-heart {
+  cursor: pointer;
+}
+
+.main-play {
+  font-size: small;
+  li {
+    cursor: pointer;
+  }
+  height: 12em;
+  overflow-y: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #282828;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

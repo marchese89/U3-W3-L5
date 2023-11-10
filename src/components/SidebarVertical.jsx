@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getSongsAction } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getSongsAction, selectSongAction } from "../redux/actions";
 
 export default function SidebarVertical() {
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
+
+  const favouritesFromReduxStore = useSelector(
+    (state) => state.song.favourites
+  );
+
+  function selectSong(song) {
+    dispatch(selectSongAction(song));
+  }
 
   useEffect(() => {
     if (searchQuery !== "") {
@@ -59,7 +67,7 @@ export default function SidebarVertical() {
                   </a>
                 </li>
                 <li>
-                  <form className="input-group mt-3">
+                  <div className="input-group mt-3">
                     <input
                       type="text"
                       className="form-control"
@@ -75,16 +83,34 @@ export default function SidebarVertical() {
                     <div className="input-group-append">
                       <button
                         className="btn btn-outline-secondary btn-sm h-100"
-                        type="submit"
+                        onClick={() => setSearchQuery(searchQuery)}
                       >
                         GO
                       </button>
                     </div>
-                  </form>
+                  </div>
                 </li>
               </ul>
             </div>
           </div>
+        </div>
+        <div className="flex-grow-1 w-100">
+          <h6 className="text-white text-center">Playlist Principale</h6>
+          <ul className="text-white main-play">
+            {favouritesFromReduxStore.map((song) => {
+              return (
+                <li
+                  className="mb-2"
+                  onClick={() => selectSong(song)}
+                  key={song.id}
+                >
+                  {song.title.length < 30
+                    ? song.title
+                    : song.title.substring(0, 29) + "..."}
+                </li>
+              );
+            })}
+          </ul>
         </div>
         <div className="nav-btn d-flex flex-column align-items-center justify-content-center sign-log">
           <button className="btn signup-btn" type="button">
