@@ -45,7 +45,7 @@ export default function SidebarVertical() {
                   </a>
                 </li>
                 <li>
-                  <form className="input-group mt-3" onsubmit="search(event)">
+                  <form className="input-group mt-3" onSubmit="search(event)">
                     <input
                       type="text"
                       className="form-control"

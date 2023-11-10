@@ -1,6 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
+import { getSongsAction } from "../redux/actions";
+import { useEffect } from "react";
+import AlbumCard from "./AlbumCard";
+
 export default function Main() {
+  const dispatch = useDispatch();
+  const search1FromReduxStore = useSelector((state) => state.search.search1);
+  const search2FromReduxStore = useSelector((state) => state.search.search2);
+  const search3FromReduxStore = useSelector((state) => state.search.search3);
+
+  useEffect(() => {
+    dispatch(getSongsAction("queen", 1));
+    dispatch(getSongsAction("katyperry", 2));
+    dispatch(getSongsAction("eminem", 3));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div class="col-12 col-md-9 offset-md-3 mainPage">
+    <div className="col-12 col-md-9 offset-md-3 mainPage">
       <div className="row">
         <div className="col-9 col-lg-11 mainLinks d-none d-md-flex">
           <a href="#">TRENDING</a>
@@ -25,7 +42,13 @@ export default function Main() {
             <div
               className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
               id="rockSection"
-            ></div>
+            >
+              {search1FromReduxStore
+                .filter((s, i) => i < 4)
+                .map((song, i) => {
+                  return <AlbumCard key={i} songInfo={song} />;
+                })}
+            </div>
           </div>
         </div>
       </div>
@@ -36,18 +59,30 @@ export default function Main() {
             <div
               className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
               id="popSection"
-            ></div>
+            >
+              {search2FromReduxStore
+                .filter((s, i) => i < 4)
+                .map((song, i) => {
+                  return <AlbumCard key={i} songInfo={song} />;
+                })}
+            </div>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col-10">
           <div id="hiphop">
-            <h2>#HipHop</h2>
+            <h2>HipHop</h2>
             <div
               className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
               id="hipHopSection"
-            ></div>
+            >
+              {search3FromReduxStore
+                .filter((s, i) => i < 4)
+                .map((song, i) => {
+                  return <AlbumCard key={i} songInfo={song} />;
+                })}
+            </div>
           </div>
         </div>
       </div>
