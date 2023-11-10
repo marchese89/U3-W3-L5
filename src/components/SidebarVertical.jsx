@@ -9,6 +9,7 @@ export default function SidebarVertical() {
   const favouritesFromReduxStore = useSelector(
     (state) => state.song.favourites
   );
+  const secondaryFromReduxStore = useSelector((state) => state.song.secondary);
 
   function selectSong(song) {
     dispatch(selectSongAction(song));
@@ -98,6 +99,24 @@ export default function SidebarVertical() {
           <h6 className="text-white text-center">Playlist Principale</h6>
           <ul className="text-white main-play">
             {favouritesFromReduxStore.map((song) => {
+              return (
+                <li
+                  className="mb-2"
+                  onClick={() => selectSong(song)}
+                  key={song.id}
+                >
+                  {song.title.length < 30
+                    ? song.title
+                    : song.title.substring(0, 29) + "..."}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="flex-grow-1 w-100">
+          <h6 className="text-white text-center">Playlist Secondaria</h6>
+          <ul className="text-white secondary-play">
+            {secondaryFromReduxStore.map((song) => {
               return (
                 <li
                   className="mb-2"

@@ -198,7 +198,16 @@ ul {
   li {
     cursor: pointer;
   }
-  height: 12em;
+  height: 6em;
+  overflow-y: auto;
+}
+
+.secondary-play {
+  font-size: small;
+  li {
+    cursor: pointer;
+  }
+  height: 6em;
   overflow-y: auto;
 }
 
@@ -220,4 +229,12 @@ ul {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.tendina {
+  z-index: 100;
+  background-color: #282828;
+  padding: 1em;
+  border-radius: 7px;
+  font-size: small;
 }

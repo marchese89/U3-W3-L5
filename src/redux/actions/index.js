@@ -1,6 +1,8 @@
 export const GET_SONGS = "GET_SONGS";
 export const ADD_SONG_TO_FAVOURITES = "ADD_SONG_TO_FAVOURITES";
 export const REMOVE_SONG_FROM_FAVOURITES = "REMOVE_SONG_FROM_FAVOURITES";
+export const ADD_SONG_TO_SECONDARY = "ADD_SONG_TO_SECONDARY";
+export const REMOVE_SONG_FROM_SECONDARY = "REMOVE_SONG_FROM_SECONDARY";
 export const SELECT_SONG = "SELECT_SONG";
 
 export const getSongsAction = (searchQuery, index) => {
@@ -53,6 +55,20 @@ export function addSongToFavouritesAction(song) {
   return {
     type: ADD_SONG_TO_FAVOURITES,
     payload: song,
+  };
+}
+
+export function addSongToSecondaryAction(song) {
+  return {
+    type: ADD_SONG_TO_SECONDARY,
+    payload: song,
+  };
+}
+
+export function removeSongFromSecondaryAction(id) {
+  return {
+    type: REMOVE_SONG_FROM_SECONDARY,
+    payload: id,
   };
 }
 
