@@ -1,7 +1,18 @@
+import { useDispatch } from "react-redux";
+import { selectSongAction } from "../redux/actions";
+
 export default function AlbumCard({ songInfo }) {
+  const dispatch = useDispatch();
+  function selectSong() {
+    dispatch(selectSongAction(songInfo));
+  }
   return (
-    <div class="col text-center" id={songInfo.id}>
-      <img class="img-fluid" src={songInfo.album.cover_medium} alt="track" />
+    <div className="col text-center song" id={songInfo.id} onClick={selectSong}>
+      <img
+        className="img-fluid"
+        src={songInfo.album.cover_medium}
+        alt="track"
+      />
       <p>
         Track:{" "}
         {songInfo.title.length < 16

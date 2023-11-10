@@ -1,4 +1,18 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getSongsAction } from "../redux/actions";
+
 export default function SidebarVertical() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (searchQuery !== "") {
+      dispatch(getSongsAction(searchQuery, 4));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
+
   return (
     <div className="col col-2">
       <nav
@@ -45,7 +59,7 @@ export default function SidebarVertical() {
                   </a>
                 </li>
                 <li>
-                  <form className="input-group mt-3" onSubmit="search(event)">
+                  <form className="input-group mt-3">
                     <input
                       type="text"
                       className="form-control"
@@ -53,6 +67,10 @@ export default function SidebarVertical() {
                       placeholder="Search"
                       aria-label="Search"
                       aria-describedby="basic-addon2"
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                      }}
+                      value={searchQuery}
                     />
                     <div className="input-group-append">
                       <button

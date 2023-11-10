@@ -1,10 +1,11 @@
 export const GET_SONGS = "GET_SONGS";
+export const ADD_SONG_TO_FAVOURITES = "ADD_SONG_TO_FAVOURITES";
+export const REMOVE_SONG_FROM_FAVOURITES = "REMOVE_SONG_FROM_FAVOURITES";
+export const SELECT_SONG = "SELECT_SONG";
 
 export const getSongsAction = (searchQuery, index) => {
   return async (dispatch) => {
     if (searchQuery.length > 2) {
-      document.querySelector("#searchResults").style.display = "block";
-
       try {
         let response = await fetch(
           "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
@@ -31,6 +32,19 @@ export const getSongsAction = (searchQuery, index) => {
       } catch (err) {
         console.log("error", err);
       }
+    } else {
+      dispatch({
+        type: GET_SONGS,
+        payload: [],
+        index: index,
+      });
     }
+  };
+};
+
+export const selectSongAction = (id) => {
+  return {
+    type: SELECT_SONG,
+    payload: id,
   };
 };

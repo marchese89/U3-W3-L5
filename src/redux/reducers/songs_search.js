@@ -4,6 +4,7 @@ const initialState = {
   search1: [],
   search2: [],
   search3: [],
+  search4: [],
 };
 
 export default function songsSearchReducer(state = initialState, action) {

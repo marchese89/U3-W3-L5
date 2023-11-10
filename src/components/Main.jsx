@@ -8,6 +8,7 @@ export default function Main() {
   const search1FromReduxStore = useSelector((state) => state.search.search1);
   const search2FromReduxStore = useSelector((state) => state.search.search2);
   const search3FromReduxStore = useSelector((state) => state.search.search3);
+  const search4FromReduxStore = useSelector((state) => state.search.search4);
 
   useEffect(() => {
     dispatch(getSongsAction("queen", 1));
@@ -29,10 +30,16 @@ export default function Main() {
       </div>
       <div className="row">
         <div className="col-10">
-          <div id="searchResults" style={{ display: "none" }}>
-            <h2>Search Results</h2>
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"></div>
-          </div>
+          {search4FromReduxStore.length > 0 && (
+            <div id="searchResults">
+              <h2>Search Results</h2>
+              <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
+                {search4FromReduxStore.map((song, i) => {
+                  return <AlbumCard key={i} songInfo={song} />;
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="row">

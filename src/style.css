@@ -170,4 +170,12 @@ ul {
 
 .sign-log {
   margin: 1em auto;
+}
+
+.song {
+  cursor: pointer;
+}
+
+.end-buttom {
+  width: 33%;
 }/*# sourceMappingURL=style.css.map */
