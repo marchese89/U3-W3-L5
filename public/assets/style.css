@@ -1,6 +1,11 @@
 body {
-  background: rgb(46, 63, 87) !important;
-  background: linear-gradient(90deg, rgb(63, 86, 119) 0%, rgb(33, 44, 61) 42%, rgb(15, 21, 29) 100%);
+  background: rgb(46, 63, 87);
+  background: linear-gradient(
+    90deg,
+    rgb(63, 86, 119) 0%,
+    rgba(33, 44, 61, 1) 42%,
+    rgb(15, 21, 29) 100%
+  );
 }
 
 /*SIDEBAR SECTION*/
@@ -85,7 +90,9 @@ ul {
     display: none;
   }
 }
+
 /* BOTTOM PLAYER SECTION*/
+
 .bg-container {
   height: 5.5rem;
   background-color: #282828;
@@ -123,7 +130,9 @@ ul {
     margin-right: 25%;
   }
 }
+
 /*MAIN PAGE SECTION*/
+
 .mainLinks {
   margin-top: 1.5rem;
   justify-content: space-evenly;
@@ -167,7 +176,3 @@ ul {
 .mainPage img {
   width: 200px;
 }
-
-.sign-log {
-  margin: 1em auto;
-}/*# sourceMappingURL=style.css.map */

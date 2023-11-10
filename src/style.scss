@@ -1,5 +1,5 @@
 body {
-  background: rgb(46, 63, 87);
+  background: rgb(46, 63, 87) !important;
   background: linear-gradient(
     90deg,
     rgb(63, 86, 119) 0%,
@@ -175,4 +175,8 @@ ul {
 
 .mainPage img {
   width: 200px;
+}
+
+.sign-log {
+  margin: 1em auto;
 }
