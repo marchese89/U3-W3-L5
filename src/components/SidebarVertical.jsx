@@ -1,10 +1,42 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSongsAction, selectSongAction } from "../redux/actions";
+import {
+  getSongsAction,
+  removeSongFromFavouritesAction,
+  removeSongFromSecondaryAction,
+  selectSongAction,
+} from "../redux/actions";
 
 export default function SidebarVertical() {
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
+  const [contextMenuPosition, setContextMenuPosition] = useState({
+    top: 0,
+    left: 0,
+  });
+  const [isContextMenuVisible, setContextMenuVisible] = useState(false);
+  const [isSecContextMenuVisible, setSecContextMenuVisible] = useState(false);
+  const [idCurrentSong, setIdCurrentSong] = useState();
+
+  function openCurtainMenu(e, id) {
+    e.preventDefault();
+    setIdCurrentSong(id);
+    setContextMenuPosition({
+      top: e.clientY + window.scrollY,
+      left: e.clientX + window.scrollX,
+    });
+    setContextMenuVisible(true);
+  }
+
+  function openCurtainMenuSec(e, id) {
+    e.preventDefault();
+    setIdCurrentSong(id);
+    setContextMenuPosition({
+      top: e.clientY + window.scrollY,
+      left: e.clientX + window.scrollX,
+    });
+    setSecContextMenuVisible(true);
+  }
 
   const favouritesFromReduxStore = useSelector(
     (state) => state.song.favourites
@@ -13,6 +45,16 @@ export default function SidebarVertical() {
 
   function selectSong(song) {
     dispatch(selectSongAction(song));
+  }
+
+  function removeFromFavourites() {
+    dispatch(removeSongFromFavouritesAction(idCurrentSong));
+    setContextMenuVisible(false);
+  }
+
+  function removeFromSecondary() {
+    setSecContextMenuVisible(false);
+    dispatch(removeSongFromSecondaryAction(idCurrentSong));
   }
 
   useEffect(() => {
@@ -104,6 +146,7 @@ export default function SidebarVertical() {
                   className="mb-2"
                   onClick={() => selectSong(song)}
                   key={song.id}
+                  onContextMenu={(e) => openCurtainMenu(e, song.id)}
                 >
                   {song.title.length < 30
                     ? song.title
@@ -112,6 +155,22 @@ export default function SidebarVertical() {
               );
             })}
           </ul>
+
+          {isContextMenuVisible && (
+            <div
+              className="position-absolute tendina"
+              style={{
+                position: "fixed",
+                top: contextMenuPosition.top,
+                left: contextMenuPosition.left,
+                cursor: "pointer",
+                color: "white",
+              }}
+              onClick={removeFromFavourites}
+            >
+              Rimuovi dalla playlist
+            </div>
+          )}
         </div>
         <div className="flex-grow-1 w-100">
           <h6 className="text-white text-center">Playlist Secondaria</h6>
@@ -122,6 +181,7 @@ export default function SidebarVertical() {
                   className="mb-2"
                   onClick={() => selectSong(song)}
                   key={song.id}
+                  onContextMenu={(e) => openCurtainMenuSec(e, song.id)}
                 >
                   {song.title.length < 30
                     ? song.title
@@ -130,6 +190,21 @@ export default function SidebarVertical() {
               );
             })}
           </ul>
+          {isSecContextMenuVisible && (
+            <div
+              className="position-absolute tendina"
+              style={{
+                position: "fixed",
+                top: contextMenuPosition.top,
+                left: contextMenuPosition.left,
+                cursor: "pointer",
+                color: "white",
+              }}
+              onClick={removeFromSecondary}
+            >
+              Rimuovi dalla playlist
+            </div>
+          )}
         </div>
         <div className="nav-btn d-flex flex-column align-items-center justify-content-center sign-log">
           <button className="btn signup-btn" type="button">
